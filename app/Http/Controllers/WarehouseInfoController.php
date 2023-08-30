@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Warehouse;
+use Illuminate\Support\Facades\Auth;
 
 class WarehouseInfoController extends Controller
 {
     public function index()
     {        
-        // Fetch all employees from the 'others' table with role 'Employee'
-        $warehouses = Warehouse::all(); 
-        
-        return view('warehouse_info', ['warehouses' => $warehouses]);
+        // Fetch employees with the logged-in user's user_id and role 'Employee'
+        $userWarehouses = Warehouse::all()
+            ->where('user_id', Auth::id()); // Filter by user_id using Auth facade
+            
+    
+        return view('warehouse_info', ['warehouse' => $userWarehouses]);
     }
     
     public function search(Request $request)

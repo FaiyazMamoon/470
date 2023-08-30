@@ -10,6 +10,8 @@ use App\Http\Controllers\EmployeeAddController;
 use App\Http\Controllers\CustomerAddController;
 use App\Http\Controllers\PlotInfoController;
 use App\Http\Controllers\PlotAddController;
+use App\Http\Controllers\WarehouseInfoController;
+use App\Http\Controllers\WarehouseAddController;
 
 //welcome page
 Route::get('/', function () {

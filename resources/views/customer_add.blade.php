@@ -88,11 +88,15 @@
                     <a class="nav-link dropdown-toggle" href="#" id="warehouseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Warehouse
                     </a>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="warehouseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Warehouse
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="warehouseDropdown" style="min-width: 160px;">
-                        <a class="dropdown-item" href="#">Search Warehouse</a>
-                        <a class="dropdown-item" href="#">Search Items</a>
-                        <a class="dropdown-item" href="#">Add/Update Warehouse</a>
+                        <a class="dropdown-item" href="{{ route('warehouse.info') }}">Information</a>
+                        <a class="dropdown-item" href="{{ route('warehouse.add.submit') }}">Add/Update</a>
                     </div>
+                </li>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="personnelDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

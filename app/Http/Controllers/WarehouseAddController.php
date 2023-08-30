@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Warehouse;
+use Illuminate\Support\Facades\Auth;
 
 class WarehouseAddController extends Controller
 {
@@ -33,6 +34,7 @@ class WarehouseAddController extends Controller
         }
     
         $warehouse = new Warehouse();
+        $warehouse->user_id = Auth::id(); 
         $warehouse->name = $request->input('name');      
         $warehouse->address = $request->input('address');
         $warehouse->crop = $request->input('crop');

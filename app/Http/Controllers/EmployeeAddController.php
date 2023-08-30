@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Other;
 use Illuminate\Support\Facades\Auth;
-
 class EmployeeAddController extends Controller
 {
     public function index()

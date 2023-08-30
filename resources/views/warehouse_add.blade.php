@@ -74,21 +74,6 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="financeDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Finance
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="financeDropdown" style="min-width: 160px;">
-                        <a class="dropdown-item" href="#">Sales</a>
-                        <a class="dropdown-item" href="#">Wages</a>
-                        <a class="dropdown-item" href="#">Rents and Bills</a>
-                        <a class="dropdown-item" href="#">Profit/Loss</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="warehouseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Warehouse
-                    </a>
-                    <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="warehouseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Warehouse
                     </a>
@@ -96,7 +81,6 @@
                         <a class="dropdown-item" href="{{ route('warehouse.info') }}">Information</a>
                         <a class="dropdown-item" href="{{ route('warehouse.add.submit') }}">Add/Update</a>
                     </div>
-                </li>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="personnelDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -125,20 +109,19 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px;">
-                    <div class="card-header" style="font-family: 'ITC Legacy Sans Pro Condensed Bold'; font-size: 24px;">Employee Information</div>
+                    <div class="card-header" style="font-family: 'ITC Legacy Sans Pro Condensed Bold'; font-size: 24px;">Warehouse Information</div>
                     <div class="card-body" style="font-family: 'ITC Legacy Sans Pro Condensed Bold';">
                         <div class="form-group">
                             <label for="actionSelect">Choose whether to Add or Update:</label>
                             <select class="form-control" id="actionSelect">
                                 <option value="" selected disabled>Select an action</option>
-                                <option value="add">Add New Employee</option>
-                                <option value="update">Update Employee Details</option>
-                                <option value="delete">Delete Employee</option>
+                                <option value="add">Add New Warehouse</option>
+                                <option value="update">Update Warehouse Details</option>
                             </select>
                             <br>
                             @if ($errors->any())
                                 <div class="alert alert-danger text-center py-2" style="width: 50%; margin: 0 auto;" id="errorAlert">
-                                    One or more fields are missing.
+                                    One or more fields are empty.
                                 </div>
                                 <script>
                                     setTimeout(function() {
@@ -147,124 +130,80 @@
                                 </script>
                             @endif
                         </div>
-                        <!-- Add Employee form-->
-                        <div id="addEmployeeForm" style="display: none;">
+                        <div id="addWarehouseForm" style="display: none;">
                         <br>
-                            <h5>Add New Employee</h5>
-                            <form action="{{ route('employee.add') }}" method="POST">
+                            <h5>Add New Warehouse</h5>
+                            <form action="{{ route('warehouse.add') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name:</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
                                 </div>
-                                <div class="form-group">
-                                    <label for="role">Role:</label>
-                                    <input type="text" class="form-control" id="role" name="role" value="Employee" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="specific_role">Specific Role:</label>
-                                    <select class="form-control" id="specific_role" name="specific_role">
-                                        <option value="Farmer">Farmer</option>
-                                        <option value="Manager">Manager</option>
-                                        <option value="Laborer">Laborer</option>
-                                    </select>
-                                </div>
+                                
                                 <div class="form-group">
                                     <label for="address">Address:</label>
                                     <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone_no">Phone No.:</label>
-                                    <input type="text" class="form-control" id="phone_no" name="phone_no" placeholder="Enter phone number">
+                                    <label for="crop">Crop:</label>
+                                    <input type="text" class="form-control" id="crop" name="crop" placeholder="Enter crop name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="salary">Salary:</label>
-                                    <input type="text" class="form-control" id="salary" name="salary" placeholder="Enter salary">
+                                    <label for="rent">Rent:</label>
+                                    <input type="text" class="form-control" id="rent" name="rent" placeholder="Enter rent">
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-primary">Add Employee</button>
+                                <button type="submit" class="btn btn-primary">Add Warehouse</button>
                             </form>
                         </div>
-                        <!-- Update Employee form-->                
-                        <div id="updateEmployeeForm" style="display: none;">
+
+                        <div id="updateWarehouseForm" style="display: none;">
                             <br>
-                            <h5>Update Employee Details</h5>
-                            <form action="{{ route('employee.update') }}" method="POST">
+                            <h5>Update Warehouse Details</h5>
+                            <form action="{{ route('warehouse.update') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="updateName">Name:</label>
                                     <input type="text" class="form-control" id="updateName" name="updateName" placeholder="Enter name">
                                 </div>
-                                <div class="form-group">
-                                    <label for="updateSpecificRole">Specific Role:</label>
-                                    <select class="form-control" id="updateSpecificRole" name="updateSpecificRole">
-                                        <option value="Farmer">Farmer</option>
-                                        <option value="Manager">Manager</option>
-                                        <option value="Laborer">Laborer</option>
-                                    </select>
-                                </div>
+                    
                                 <div class="form-group">
                                     <label for="updateAddress">Address:</label>
                                     <input type="text" class="form-control" id="updateAddress" name="updateAddress" placeholder="Enter address">
                                 </div>
                                 <div class="form-group">
-                                    <label for="updatePhoneNo">Phone No.:</label>
-                                    <input type="text" class="form-control" id="updatePhoneNo" name="updatePhoneNo" placeholder="Enter phone number">
+                                    <label for="updateCrop">Phone No.:</label>
+                                    <input type="text" class="form-control" id="updateCrop" name="updateCrop" placeholder="Enter crop name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="updateSalary">Salary:</label>
-                                    <input type="text" class="form-control" id="updateSalary" name="updateSalary" placeholder="Enter salary">
+                                    <label for="updateRent">Rent:</label>
+                                    <input type="text" class="form-control" id="updateRent" name="updateRent" placeholder="Enter Rent">
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-primary">Update Employee</button>
+                                <button type="submit" class="btn btn-primary">Update Warehouse</button>
                             </form>
+
+
                         </div>
-                            <!--Delete Employee form-->            
-                            <div id="deleteEmployeeForm" style="display: none;">
-                        <br>
-                        <h5>Delete Employee</h5>
-                        <form action="{{ route('employee.delete') }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="deleteName">Name:</label>
-                                <input type="text" class="form-control" id="deleteName" name="deleteName" placeholder="Enter name">
-                            </div>
-                            <div class="form-group">
-                                <label for="deleteAddress">Address:</label>
-                                <input type="text" class="form-control" id="deleteAddress" name="deleteAddress" placeholder="Enter address">
-                            </div>
-                            <div class="form-group">
-                                <label for="deletePhoneNo">Phone No.:</label>
-                                <input type="text" class="form-control" id="deletePhoneNo" name="deletePhoneNo" placeholder="Enter phone number">
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn-danger">Delete Employee</button>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
 <script>
     document.getElementById('actionSelect').addEventListener('change', function() {
         var selectedOption = this.options[this.selectedIndex].value;
         if (selectedOption === 'add') {
-            document.getElementById('addEmployeeForm').style.display = 'block';
-            document.getElementById('updateEmployeeForm').style.display = 'none';
-            document.getElementById('deleteEmployeeForm').style.display = 'none';
+            document.getElementById('addWarehouseForm').style.display = 'block';
+            document.getElementById('updateWarehouseForm').style.display = 'none';
         } else if (selectedOption === 'update') {
-            document.getElementById('addEmployeeForm').style.display = 'none';
-            document.getElementById('updateEmployeeForm').style.display = 'block';
-            document.getElementById('deleteEmployeeForm').style.display = 'none';
-        } else if (selectedOption === 'delete') {
-            document.getElementById('addEmployeeForm').style.display = 'none';
-            document.getElementById('updateEmployeeForm').style.display = 'none';
-            document.getElementById('deleteEmployeeForm').style.display = 'block';
+            document.getElementById('addWarehouseForm').style.display = 'none';
+            document.getElementById('updateWarehouseForm').style.display = 'block';
         } else {
-            document.getElementById('addEmployeeForm').style.display = 'none';
-            document.getElementById('updateEmployeeForm').style.display = 'none';
-            document.getElementById('deleteEmployeeForm').style.display = 'none';
+            document.getElementById('addWarehouseForm').style.display = 'none';
+            document.getElementById('updateWarehouseForm').style.display = 'none';
         }
     });
 </script>
@@ -274,7 +213,7 @@
                                 <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 start-50 translate-middle" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                                     <div class="d-flex">
                                         <div class="toast-body">
-                                        Employee already exists.
+                                        Warehouse already exists.
                                         </div>
                                         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                                     </div>
@@ -285,7 +224,7 @@
                                 <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 start-50 translate-middle" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                                     <div class="d-flex">
                                         <div class="toast-body">
-                                        Employee added successfully.
+                                        Warehouse added successfully.
                                         </div>
                                         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                                     </div>
@@ -297,35 +236,23 @@
                                 <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 start-50 translate-middle" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                                     <div class="d-flex">
                                         <div class="toast-body">
-                                        Employee details updated successfully.
+                                        Warehouse details updated successfully.
                                         </div>
                                         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                                     </div>
                                 </div>
                             @endif
                                 <!-- Success Toast Message -->
-                                @if (session('success'))
-                                <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 start-50 translate-middle" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
-                                    <div class="d-flex">
-                                        <div class="toast-body">
-                                        Employee details removed successfully.
-                                        </div>
-                                        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                                    </div>
-                                </div>
-                            @endif
-                                <!-- Error Toast Message -->
                                 @if (session('errorMat'))
                                 <div class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 start-50 translate-middle" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                                     <div class="d-flex">
                                         <div class="toast-body">
-                                        No matching employee found.
+                                        No matching Warehouse found.
                                         </div>
                                         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                                     </div>
                                 </div>
                             @endif
-
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', function () {

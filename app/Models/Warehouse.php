@@ -7,20 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Warehouse extends Model
 {
     public $timestamps = false;
-    protected $fillable = [
-        
+    protected $fillable = [        
         'name',
         'address',
         'crop',
-        'rent',
-        
+        'rent',        
     ];
 
     protected $casts = [
         'name' => 'string',
         'address' => 'string',
         'crop' => 'string',
-        'rent' => 'decimal:2',
-        
+        'rent' => 'decimal:2',        
     ];
 }

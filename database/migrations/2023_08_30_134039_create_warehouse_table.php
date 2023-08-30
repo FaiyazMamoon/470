@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('warehouse', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('crop')->nullable();
             $table->decimal('rent', 10, 2)->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
         });
     }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Customer-Info</title>
+    <title>Warehouse-Info</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -74,21 +74,6 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="financeDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Finance
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="financeDropdown" style="min-width: 160px;">
-                        <a class="dropdown-item" href="#">Sales</a>
-                        <a class="dropdown-item" href="#">Wages</a>
-                        <a class="dropdown-item" href="#">Rents and Bills</a>
-                        <a class="dropdown-item" href="#">Profit/Loss</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="warehouseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Warehouse
-                    </a>
-                    <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="warehouseDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Warehouse
                     </a>
@@ -96,7 +81,6 @@
                         <a class="dropdown-item" href="{{ route('warehouse.info') }}">Information</a>
                         <a class="dropdown-item" href="{{ route('warehouse.add.submit') }}">Add/Update</a>
                     </div>
-                </li>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="personnelDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -125,46 +109,51 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px;">
-                    <div class="card-header" style="font-family: 'ITC Legacy Sans Pro Condensed Bold'; font-size: 24px;">Customer Information</div>
+                    <div class="card-header" style="font-family: 'ITC Legacy Sans Pro Condensed Bold'; font-size: 24px;">Warehouse Information</div>
                     <div class="card-body" style="font-family: 'ITC Legacy Sans Pro Condensed Bold';">
-                        <form action="{{ route('customer.search') }}" method="POST">
+                        <form action="{{ route('warehouse.info.search') }}" method="GET">
                             @csrf
                             <div class="form-group">
-                                <label for="customerName">Search for your Customers:</label>
-                                <input type="text" class="form-control" id="customerName" name="customerName" placeholder="Enter customer name">
+                                <label for="warehouseName">Search from your Warehouses:</label>
+                                <input type="text" class="form-control" id="warehouseName" name="warehouseName" placeholder="Enter warehouse name">
                             </div>
                             <br>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
-                        <!-- Table of customers -->
-                        @if (isset($matchingCustomers) && $matchingCustomers->count() > 0)
+                        <!--Tale of employees-->
+                        @if (isset($matchingWarehouses) && $matchingWarehouses->count() > 0)
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Type</th>
                                         <th>Address</th>
-                                        <th>Phone No.</th>
+                                        <th>Crops</th>
+                                        <th>Rent</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($matchingCustomers as $customer)
+                                    @foreach ($matchingWarehouses as $warehouses)
                                         <tr>
-                                            <td>{{ $customer->name }}</td>
-                                            <td>{{ $customer->specific_role }}</td>
-                                            <td>{{ $customer->address }}</td>
-                                            <td>{{ $customer->phone_no }}</td>
+                                            <td>{{ $warehouses->name }}</td>                                            
+                                            <td>{{ $warehouses->address }}</td>
+                                            <td>{{ $warehouses->crop }}</td>
+                                            <td>{{ $warehouses->rent }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         @endif
-                        <!-- Error message if no match found -->
                         @if (isset($noMatch) && $noMatch)
                             <div class="alert alert-danger text-center py-2" role="alert" style="width: 50%; margin: 0 auto;">
-                                No matching customer found.
+                                No matching warehouse found.
                             </div>
                         @endif
+
+
+                        
+
+
+
                     </div>
                 </div>
             </div>
@@ -172,5 +161,11 @@
     </div>
 </header>
 
+
+
+
+
+    <!-- JS scripts and closing body/html tags -->
+    <!-- ... -->
 </body>
 </html>
